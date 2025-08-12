@@ -1,10 +1,11 @@
 from memory_profiler import memory_usage
 import time
+import matplotlib.pyplot as plt
 
-def facto_iteratico(n): 
+def facto_iterativo(n): 
     if n < 0:
         return "error"
-    elif n == 1: 
+    elif n == 1 or n == 0: 
         return 1
     else:
         resultado = 1
@@ -15,7 +16,7 @@ def facto_iteratico(n):
 def facto_recursivo(n):
     if n < 0:
         return "error"
-    elif n == 1: 
+    elif n == 1 or n == 0: 
         return 1
     else:
         return n * facto_recursivo(n-1)
@@ -23,42 +24,49 @@ def facto_recursivo(n):
 if __name__ == "__main__":
     lista_tiempos_i = []
     lista_tiempos_r = []
-    lista_resultados_i = []
-    lista_resultados_r = []
     lista_memoria_i = []
     lista_memoria_r = []
 
+    n_valores = list(range(1, 100))
+
     # Iterativo
-    for i in range(1, 20):
+    for i in n_valores:
         inicio = time.perf_counter()
-        mem = memory_usage((facto_iteratico, (i,)), max_iterations=20)
-        lista_resultados_i.append(facto_iteratico(i)) 
+        mem, _ = memory_usage((facto_iterativo, (i,)), retval=True, max_iterations=1)
         fin = time.perf_counter()
-        
         lista_tiempos_i.append(fin - inicio)
-        lista_memoria_i.append(max(mem))  # Guardar valor máximo de RAM
+        lista_memoria_i.append(max(mem))
 
     # Recursivo
-    for i in range(1, 20):
+    for i in n_valores:
         inicio = time.perf_counter()
-        mem = memory_usage((facto_recursivo, (i,)), max_iterations=20)
-        lista_resultados_r.append(facto_recursivo(i)) 
+        mem, _ = memory_usage((facto_recursivo, (i,)), retval=True, max_iterations=1)
         fin = time.perf_counter()
-        
         lista_tiempos_r.append(fin - inicio)
         lista_memoria_r.append(max(mem))
 
-    # Resultados
-    print("tiempos iterativo")
-    print(lista_tiempos_i)
-    print("memoria iterativo (MB)")
-    print(lista_memoria_i)
-    print("resultados iterativo")
-    print(lista_resultados_i)
-    print("-"*30)
-    print("tiempos recursivo")
-    print(lista_tiempos_r)
-    print("memoria recursivo (MB)")
-    print(lista_memoria_r)
-    print("resultados recursivo")
-    print(lista_resultados_r)
+    # ======= GRAFICAR =======
+    plt.figure(figsize=(10, 4))
+
+    # Gráfica de tiempos
+    plt.subplot(1, 2, 1)
+    plt.plot(n_valores, lista_tiempos_i, marker='o', label="Iterativo")
+    plt.plot(n_valores, lista_tiempos_r, marker='o', label="Recursivo")
+    plt.title("Comparación de Tiempos")
+    plt.xlabel("n")
+    plt.ylabel("Tiempo (segundos)")
+    plt.legend()
+    plt.grid(True)
+
+    # Gráfica de memoria
+    plt.subplot(1, 2, 2)
+    plt.plot(n_valores, lista_memoria_i, marker='o', label="Iterativo")
+    plt.plot(n_valores, lista_memoria_r, marker='o', label="Recursivo")
+    plt.title("Comparación de Uso de Memoria")
+    plt.xlabel("n")
+    plt.ylabel("Memoria (MB)")
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
