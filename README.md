@@ -1,53 +1,68 @@
-Análisis Comparativo: Factorial Recursivo e Iterativo en Python y C
-Introducción
+# Análisis Comparativo: Factorial Recursivo e Iterativo en Python y C
+
+## Introducción
 Esta tarea tiene como objetivo analizar y comparar la eficiencia de dos métodos para calcular el factorial de un número entero positivo n:
 
-Método Recursivo: donde la función se invoca a sí misma hasta alcanzar un caso base.
-Método Iterativo: donde se utiliza un bucle para calcular el factorial de forma secuencial.
+- **Método Recursivo:** donde la función se invoca a sí misma hasta alcanzar un caso base.
+- **Método Iterativo:** donde se utiliza un bucle para calcular el factorial de forma secuencial.
+
 Se evaluarán ambos métodos en dos lenguajes: Python y C, con foco en el tiempo de ejecución y el consumo de memoria.
 
-Descripción de las Implementaciones
-En Python
+---
+
+## Descripción de las Implementaciones
+
+### En Python
 Las funciones están implementadas de la siguiente manera:
 
-facto_recursivo(n): función recursiva que devuelve el factorial de n.
-facto_iterativo(n): función iterativa que calcula el factorial usando un ciclo for.
+- facto_recursivo(n): función recursiva que devuelve el factorial de n.
+- facto_iterativo(n): función iterativa que calcula el factorial usando un ciclo for.
+
 Para medir la eficiencia:
 
-Se usa time.perf_counter() para calcular el tiempo.
-Se utiliza la librería memory_profiler para monitorear el uso de memoria.
-Los resultados se visualizan en gráficos generados con matplotlib.
-En C
-Las funciones equivalentes:
+- Se usa time.perf_counter() para calcular el tiempo.
+- Se utiliza la librería memory_profiler para monitorear el uso de memoria.
+- Los resultados se visualizan en gráficos generados con matplotlib.
 
-facto_r(int n): cálculo recursivo del factorial.
-facto_i(int n): cálculo iterativo usando un bucle for.
+### En C
+Las funciones equivalentes:
+- facto_r(int n): cálculo recursivo del factorial.
+- facto_i(int n): cálculo iterativo usando un bucle for.
+
 Para la medición:
 
-Tiempo medido con clock() de la librería <time.h>.
-Memoria monitoreada con getrusage() de <sys/resource.h>.
-Los resultados se imprimen directamente en la consola.
-Guia para ejcutar el codigo
-descarga el repositorio en tu dispositivo
-instala el requirements.txt
-ejecución en python
-busca la carpeta con el archivo factorial.py con el comando cd
-en el terminal pon lo siguiente:
-python3 factorial.py
-ejecución en c
-busca la carpeta con el archivo factorial.py con el comando cd
-en el terminal pon lo siguiente:
-gcc factorial.c -o factorial
--l uego ejecuta
-./factorial
-para finalmente abrilo con:
-./a.out
-Herramientas y Dependencias
-Requisitos para Python
-Python 3.6 o superior.
-Librerías:
-memory_profiler
-matplotlib
+- Tiempo medido con clock() de la librería <time.h>.
+- Memoria monitoreada con getrusage() de <sys/resource.h>.
+- Los resultados se imprimen directamente en la consola.
+
+---
+## Guia para ejcutar el codigo
+- descarga el repositorio en tu dispositivo 
+- instala el requirements.txt
+### ejecución en python 
+- busca la carpeta con el archivo factorial.py con el comando *cd* 
+- en el terminal pon lo siguiente:
+    python3 factorial.py
+### ejecución en c
+- busca la carpeta con el archivo factorial.py con el comando *cd* 
+- en el terminal pon lo siguiente:
+    gcc factorial.c -o factorial
+-l uego ejecuta 
+    ./factorial
+- para finalmente abrilo con:
+    ./a.out
+
+## Herramientas y Dependencias
+
+### Requisitos para Python
+
+- Python 3.6 o superior.
+- Librerías:
+  - memory_profiler
+  - matplotlib
+
 Se recomienda instalar todas con:
 
+```bash
 pip install -r requirements.txt
+
