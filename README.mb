@@ -1,83 +1,71 @@
-Análisis Comparativo: Factorial Recursivo e Iterativo en Python y C
+# Análisis Comparativo: Factorial Recursivo e Iterativo en Python y C
 
-Introducción
-Esta tarea tiene como objetivo analizar y comparar la eficiencia de dos métodos para calcular el factorial de un número entero positivo *n*:
+## Introducción
+Esta tarea tiene como objetivo analizar y comparar la eficiencia de dos métodos para calcular el factorial de un número entero positivo n:
 
-Método Recursivo: La función se llama a sí misma hasta alcanzar un caso base.
+- **Método Recursivo:** donde la función se invoca a sí misma hasta alcanzar un caso base.
+- **Método Iterativo:** donde se utiliza un bucle para calcular el factorial de forma secuencial.
 
-Método Iterativo: Utiliza un bucle para calcular el factorial de forma secuencial.
+Se evaluarán ambos métodos en dos lenguajes: Python y C, con foco en el tiempo de ejecución y el consumo de memoria.
 
-Se evaluarán ambos métodos en dos lenguajes: Python y C, con enfoque en el tiempo de ejecución y el consumo de memoria.
+---
 
-Descripción de las Implementaciones
-En Python
+## Descripción de las Implementaciones
+
+### En Python
 Las funciones están implementadas de la siguiente manera:
 
-facto_recursivo(n): Función recursiva que devuelve el factorial de *n*.
-
-facto_iterativo(n): Función iterativa que calcula el factorial usando un ciclo for.
+- facto_recursivo(n): función recursiva que devuelve el factorial de n.
+- facto_iterativo(n): función iterativa que calcula el factorial usando un ciclo for.
 
 Para medir la eficiencia:
 
-Se usa time.perf_counter() para calcular el tiempo.
+- Se usa time.perf_counter() para calcular el tiempo.
+- Se utiliza la librería memory_profiler para monitorear el uso de memoria.
+- Los resultados se visualizan en gráficos generados con matplotlib.
 
-Se utiliza la librería memory_profiler para monitorear el uso de memoria.
-
-Los resultados se visualizan en gráficos generados con matplotlib.
-
-En C
+### En C
 Las funciones equivalentes:
 
-facto_r(int n): Cálculo recursivo del factorial.
-
-facto_i(int n): Cálculo iterativo usando un bucle for.
+- facto_r(int n): cálculo recursivo del factorial.
+- facto_i(int n): cálculo iterativo usando un bucle for.
 
 Para la medición:
 
-Tiempo medido con clock() de la librería <time.h>.
+- Tiempo medido con clock() de la librería <time.h>.
+- Memoria monitoreada con getrusage() de <sys/resource.h>.
+- Los resultados se imprimen directamente en la consola.
 
-Memoria monitoreada con getrusage() de <sys/resource.h>.
+---
 
-Los resultados se imprimen directamente en la consola.
+## Herramientas y Dependencias
 
-Herramientas y Dependencias
-Requisitos para Python
-Python 3.6 o superior.
+### Requisitos para Python
 
-Librerías necesarias:
+- Python 3.6 o superior.
+- Librerías:
+  - memory_profiler
+  - matplotlib
 
-memory_profiler
+Se recomienda instalar todas con:
 
-matplotlib
-
-Instalación recomendada:
-
-bash
-pip install -r requirements.txt
-Guía para Ejecutar el Código
-Descarga el repositorio en tu dispositivo.
-
-Instala las dependencias con:
-
-bash
+```bash
 pip install -r requirements.txt
 
-Ejecución en Python
+---
 
-Busca la carpeta con el archivo factorial.py usando el comando:
-cd ruta_de_la_carpeta
-
-Ejecuta el programa con:
-python3 factorial.py
-
-
-Ejecución en C
-
-Busca la carpeta con el archivo factorial.c usando:
-cd ruta_de_la_carpeta
-
-Compila el programa con:
-gcc factorial.c -o factorial
-
-Ejecuta el programa con:
-./factorial
+## Guia para ejcutar el codigo
+-descarga el repositorio en tu dispositivo 
+-instala el requirements.txt
+### ejecución en python 
+-busca la carpeta con el archivo factorial.py con el comando *cd* 
+-en el terminal pon lo siguiente:
+    python3 factorial.py
+### ejecución en c
+-busca la carpeta con el archivo factorial.py con el comando *cd* 
+=en el terminal pon lo siguiente:
+    gcc factorial.c -o factorial
+-luego ejecuta 
+    ./factorial
+-para finalmente abrilo con:
+    ./a.out
