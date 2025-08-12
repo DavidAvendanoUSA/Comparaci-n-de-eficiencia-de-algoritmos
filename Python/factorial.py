@@ -27,7 +27,7 @@ if __name__ == "__main__":
     lista_memoria_i = []
     lista_memoria_r = []
 
-    n_valores = list(range(1, 100))
+    n_valores = list(range(1, 20))
 
     # Iterativo
     for i in n_valores:

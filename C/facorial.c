@@ -1,45 +1,63 @@
 #include <stdio.h>
-#include <time.h>
+#include <stdlib.h>
+#include <sys/resource.h>
+#include <unistd.h>
+#include <time.h> // Para medir el tiempo con clock()
 
-long long int facto_iterativo(int n) {
-    long long int resultado = 1; 
-    for (int i = 1; i <= n; i++) {
-        resultado *= i;
+// Factorial recursivo
+unsigned long long facto_r(int n) {  // utilizamos long long para que pueda ampliarse los digitos
+    if (n == 0 || n == 1) return 1;
+    return n * facto_r(n - 1);
+}
+
+// Factorial iterativo
+unsigned long long facto_i(int n) {   // utilizamos long long para que pueda ampliarse los digitos
+    unsigned long long res = 1;
+    for (int i = 2; i <= n; i++) {   // empieza desde 2 para que sea mas eficiente 
+        res *= i;
     }
-    return resultado;
+    return res;
 }
 
-long long int facto_recursivo(int n) {
-    if (n <= 1) return 1;
-    return n * facto_recursivo(n - 1);
+// Función para medir uso de memoria (en KB)
+long get_memory_usage_kb() {
+    struct rusage usage;
+    getrusage(RUSAGE_SELF, &usage);
+    return usage.ru_maxrss;   // Memoria mAxima usada (en KB)
 }
+
 
 int main() {
-    clock_t inicio, fin;
-    double tiempo_iterativo, tiempo_recursivo;
-    int repeticiones = 1000000; // repetir para medir bien el tiempo
+    int valores[] = {5, 50, 100, 500, 1000};  // Valores de prueba
+    int num_valores = sizeof(valores) / sizeof(valores[0]);
 
-    printf("n\tTiempo Iterativo (s)\tTiempo Recursivo (s)\n");
-    printf("-------------------------------------------------\n");
+    for (int i = 0; i < num_valores; i++) {
+        int val = valores[i];
 
-    for (int n = 1; n <= 20; n++) { // de 1 a 20
-        // Medir iterativo
-        inicio = clock();
-        for (int j = 0; j < repeticiones; j++) {
-            facto_iterativo(n);
-        }
-        fin = clock();
-        tiempo_iterativo = (double)(fin - inicio) / CLOCKS_PER_SEC / repeticiones;
+        //RECURSIVO 
+        long mem_before = get_memory_usage_kb();  // Memoria antes de calcular
+        clock_t start_r = clock(); // tiempo inicio  // Tiempo de inicio
+        unsigned long long res_r = facto_r(val);  // Calcular factorial
+        clock_t end_r = clock();   // tiempo fin// Tiempo de fin
+        long mem_after = get_memory_usage_kb();  // Memoria después
+        long mem_r = mem_after - mem_before;     // Diferencia de memoria
+        double time_r = ((double)(end_r - start_r)) / CLOCKS_PER_SEC;  // tiempo en segundos
 
-        // Medir recursivo
-        inicio = clock();
-        for (int j = 0; j < repeticiones; j++) {
-            facto_recursivo(n);
-        }
-        fin = clock();
-        tiempo_recursivo = (double)(fin - inicio) / CLOCKS_PER_SEC / repeticiones;
+        //  ITERATIVO 
+        mem_before = get_memory_usage_kb();
+        clock_t start_i = clock();
+        unsigned long long res_i = facto_i(val);
+        clock_t end_i = clock();
+        mem_after = get_memory_usage_kb();
+        long mem_i = mem_after - mem_before;
+        double time_i = ((double)(end_i - start_i)) / CLOCKS_PER_SEC;
 
-        printf("%d\t%.10f\t\t%.10f\n", n, tiempo_iterativo, tiempo_recursivo);
+        // MOSTRAR RESULTADOS 
+        printf("Valor: %d\n", val);
+        printf("  Recursivo: factorial = %llu, Memoria: %ld KB, Tiempo: %f s\n",
+               res_r, mem_r, time_r);
+        printf("  Iterativo: factorial = %llu, Memoria: %ld KB, Tiempo: %f s\n\n",
+               res_i, mem_i, time_i);
     }
 
     return 0;
