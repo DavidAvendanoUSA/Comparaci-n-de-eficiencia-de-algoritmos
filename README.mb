@@ -51,3 +51,21 @@ Se recomienda instalar todas con:
 
 ```bash
 pip install -r requirements.txt
+
+---
+
+## Guia para ejcutar el codigo
+-descarga el repositorio en tu dispositivo 
+-instala el requirements.txt
+### ejecución en python 
+-busca la carpeta con el archivo factorial.py con el comando *cd* 
+-en el terminal pon lo siguiente:
+    python3 factorial.py
+### ejecución en c
+-busca la carpeta con el archivo factorial.py con el comando *cd* 
+=en el terminal pon lo siguiente:
+    gcc factorial.c -o factorial
+-luego ejecuta 
+    ./factorial
+-para finalmente abrilo con:
+    ./a.out
